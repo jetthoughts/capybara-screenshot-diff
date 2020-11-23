@@ -9,3 +9,4 @@ gem "oily_png", platform: :ruby
 
 gem "image_processing", require: false
 gem "ruby-vips", require: false
+gem 'thin', require: false

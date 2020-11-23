@@ -120,6 +120,8 @@ module Capybara
         end
 
         def window_size_is_wrong?
+          p page.driver.browser.manage.window.size
+          p ::Selenium::WebDriver::Dimension.new(*Screenshot.window_size)
           selenium? && Screenshot.window_size &&
             page.driver.browser.manage.window.size !=
               ::Selenium::WebDriver::Dimension.new(*Screenshot.window_size)
