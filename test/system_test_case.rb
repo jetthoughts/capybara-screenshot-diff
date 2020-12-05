@@ -5,10 +5,7 @@ Webdrivers::Chromedriver.update
 
 class SystemTestCase < ActionDispatch::IntegrationTest
   setup do
-    Capybara.current_driver = :selenium_chrome_headless
-    # TODO: Allow to test with different drivers by ENV
-    # Capybara.current_driver = :selenium_chrome
-    # Capybara.current_driver = :selenium
+    Capybara.current_driver = ENV.fetch('CAPYBARA_DRIVER', :selenium_chrome_headless).to_sym
 
     # TODO: Reset original settings to previous values
     @orig_root = Capybara::Screenshot.root
@@ -17,7 +14,7 @@ class SystemTestCase < ActionDispatch::IntegrationTest
     Capybara::Screenshot.save_path = "test/fixtures/app/doc/screenshots"
     Capybara::Screenshot.enabled = true
     Capybara::Screenshot::Diff.enabled = true
-    Capybara::Screenshot::Diff.driver = :vips
+    Capybara::Screenshot::Diff.driver = ENV.fetch('SCREENSHOT_DRIVER', 'vips').to_sym
 
     # TODO: Makes configurations copying and restoring much easier
 
